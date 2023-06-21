@@ -7,7 +7,7 @@ import { client } from "../../apollo-config";
 const CharachtersLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <ApolloProvider client={client}>
-      <div className="bg-gray-600 min-h-screen px-20">{children}</div>
+      <div className="bg-gray-900 min-h-screen px-20">{children}</div>
     </ApolloProvider>
   );
 };
