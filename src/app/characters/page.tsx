@@ -54,7 +54,7 @@ export default function CharactersPage() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [page, data]);
+  }, [page, data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleLoadMore = () => {
     if (!data || !data.characters.info.next || loading) return;

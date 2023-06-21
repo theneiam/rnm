@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-4xl font-bold">Welcome to Rick'n'Morty</h1>
+      <h1 className="text-4xl font-bold">Welcome to Rick and Morty</h1>
     </main>
   );
 }
