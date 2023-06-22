@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
 
+// Components and hooks section
 import { GameResultProps } from "./GameResult.types";
 
 export const GameResult: React.FC<GameResultProps> = ({ riddle, answer }) => {

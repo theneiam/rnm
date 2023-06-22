@@ -1,6 +1,11 @@
+"use client";
+/**
+ * CharacterCard component.
+ */
 import React, { ReactNode } from "react";
 import Image from "next/image";
 
+// Types section
 import { CharacterCardProps } from "./CharacterCard.types";
 
 const CHAR_AVATAR_SIZE = 350;
@@ -11,15 +16,16 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
   orientation = "vertical",
 }): ReactNode => {
   const { id, image, name, species, status, gender, type, location } = data;
+  const isVertical = orientation === "vertical";
+  const orientationClasses = isVertical
+    ? "flex-col rounded-md"
+    : "flex-row p-10 rounded-full";
+
   return (
     <div
       key={id}
-      className={`flex ${
-        orientation === "vertical"
-          ? "flex-col rounded-md"
-          : "flex-row p-10 rounded-full"
-      }  bg-gray-800 border-2 border-[#39ff14] cursor-pointer`}
       onClick={() => onClick && onClick(id)}
+      className={`flex ${orientationClasses} bg-gray-800 border-2 border-rnm-portal-green cursor-pointer`}
     >
       <div className="flex flex-row justify-center items-center">
         <Image
@@ -28,9 +34,7 @@ export const CharacterCard: React.FC<CharacterCardProps> = ({
           alt={name}
           width={CHAR_AVATAR_SIZE}
           height={CHAR_AVATAR_SIZE}
-          className={`${
-            orientation === "vertical" ? "rounded-md" : "rounded-full"
-          }`}
+          className={`${isVertical ? "rounded-md" : "rounded-full"}`}
         />
       </div>
 

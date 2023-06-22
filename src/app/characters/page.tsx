@@ -3,10 +3,15 @@ import { useState, ChangeEvent, useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { useRouter } from "next/navigation";
 
+// Components and hooks section
 import { CharacterCard } from "@/components/CharacterCard";
-import { Character } from "@/types";
+import { Search } from "@/components/Search";
 import { useDebounce } from "@/hooks";
 
+// Types section
+import { Character } from "@/types";
+
+// GraphQL queries section
 const GET_CHARACTERS = gql`
   query Characters($page: Int, $name: String) {
     characters(page: $page, filter: { name: $name }) {
@@ -36,29 +41,22 @@ const CharactersPage: React.FC<{}> = () => {
     notifyOnNetworkStatusChange: true,
   });
 
+  // Infinite scroll implementation
   useEffect(() => {
     const handleScroll = () => {
-      if (
-        !loading &&
-        window.innerHeight + document.documentElement.scrollTop ===
-          document.documentElement.offsetHeight
-      ) {
+      const innerHeight =
+        window.innerHeight + document.documentElement.scrollTop;
+      const offsetHeight = document.documentElement.offsetHeight;
+      if (!loading && innerHeight === offsetHeight) {
         handleLoadMore();
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [page, data, loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleLoadMore = () => {
-    console.log("handleLoadMore");
-    console.log(loading, data);
-    console.log(data.characters.info.next);
-    console.log(page);
-
     if (!data || !data.characters.info.next || loading) return;
     fetchMore({
       variables: { page: data.characters.info.next },
@@ -85,20 +83,14 @@ const CharactersPage: React.FC<{}> = () => {
     setPage(1);
   };
 
-  if (error) return <p>Error: {error.message}</p>;
-
   const { characters } = data || {};
+
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="flex flex-col">
-      <div className="my-5 flex flex-row">
-        <input
-          type="search"
-          placeholder="Search"
-          onChange={handleSearch}
-          value={name}
-          className="p-3 outline-none bg-gray-700 rounded-sm text-gray-50 w-4/12 border-2 border-[#39ff14]"
-        />
+      <div className="my-5 flex flex-row w-4/12">
+        <Search onChange={handleSearch} value={name} />
       </div>
 
       <div className="gap-4 grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2">
@@ -114,17 +106,6 @@ const CharactersPage: React.FC<{}> = () => {
             />
           ))}
       </div>
-
-      {/* {characters && characters.info.next && (
-        <div className="flex flex-row justify-center my-5">
-          <button
-            onClick={handleLoadMore}
-            className="text-lg p-4 border-2 border-[#39ff14] rounded-full text-[#f8fe76]"
-          >
-            Load More
-          </button>
-        </div>
-      )} */}
     </div>
   );
 };

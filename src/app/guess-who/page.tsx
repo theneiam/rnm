@@ -1,5 +1,6 @@
 import React from "react";
 
+// Components and hooks section
 import { GuessCharacterGame } from "@/components/GuessCharacterGame";
 
 const GuessWhoPage: React.FC = () => {

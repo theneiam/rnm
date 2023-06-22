@@ -1,3 +1,6 @@
+/**
+ * Header component
+ */
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +11,7 @@ export const Header: React.FC = () => {
       <Link href="/" className="mr-20">
         <Image src="/logo.svg" alt="logo" width={150} height={150} />
       </Link>
-      <div className="flex flex-row text-[#62a4ab] gap-4">
+      <div className="flex flex-row text-rnm-blue gap-4">
         <Link href="/characters" className="text-xl">
           Charactes
         </Link>

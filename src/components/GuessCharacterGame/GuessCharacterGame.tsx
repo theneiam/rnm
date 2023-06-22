@@ -1,12 +1,15 @@
 "use client";
-
+/**
+ * Rick and Morty Guess Character Game
+ */
 import React from "react";
 
+// Components and hooks section
 import { RandomCharacter } from "@/components/RandomCharacter";
 import { CharacterNamePicker } from "@/components/CharacterNamePicker";
 import { GameResult } from "@/components/GuessCharacterGame/GameResult";
 
-// Types
+// Types section
 import type { Character } from "@/types";
 
 export const GuessCharacterGame: React.FC = () => {
