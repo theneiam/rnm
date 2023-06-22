@@ -1,4 +1,4 @@
-# Yet Another One "Rick and Morty" Fun Page
+# Yet Another One "Rick and Morty" Fan Page
 
 ### Stack
 
