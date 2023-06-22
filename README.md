@@ -14,6 +14,6 @@
 
 ### See it in action
 
-Visit [Morty-o-Ricko](https://morty-o-ricko-d31tp93uw-theneiam.vercel.app/guess-who)
+Visit [Morty-o-Ricko](https://morty-o-ricko-d31tp93uw-theneiam.vercel.app)
 
 Have fun!
