@@ -6,7 +6,7 @@ const GuessWhoPage: React.FC = () => {
   return (
     <div>
       <h1 className="text-5xl font-bold pt-5 text-white">
-        Guess Rick and Morty Character
+        Try to guess as many characters as you can!
       </h1>
       <GuessCharacterGame />
     </div>

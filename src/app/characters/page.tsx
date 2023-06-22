@@ -25,9 +25,7 @@ const GET_CHARACTERS = gql`
   }
 `;
 
-const CONTAINER_OFFSET_DELTA = 100;
-
-export default function CharactersPage() {
+const CharactersPage: React.FC<{}> = () => {
   const router = useRouter();
   const [page, setPage] = useState<number>(1);
   const [name, setName] = useState<string>("");
@@ -41,10 +39,9 @@ export default function CharactersPage() {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight +
-          document.documentElement.scrollTop +
-          CONTAINER_OFFSET_DELTA >=
-        document.documentElement.offsetHeight
+        !loading &&
+        window.innerHeight + document.documentElement.scrollTop ===
+          document.documentElement.offsetHeight
       ) {
         handleLoadMore();
       }
@@ -54,13 +51,19 @@ export default function CharactersPage() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [page, data]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [page, data, loading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleLoadMore = () => {
+    console.log("handleLoadMore");
+    console.log(loading, data);
+    console.log(data.characters.info.next);
+    console.log(page);
+
     if (!data || !data.characters.info.next || loading) return;
     fetchMore({
-      variables: { page: page + 1 },
+      variables: { page: data.characters.info.next },
       updateQuery: (prev, { fetchMoreResult }) => {
+        console.log(prev, fetchMoreResult);
         if (!fetchMoreResult) return prev;
         return {
           characters: {
@@ -74,7 +77,7 @@ export default function CharactersPage() {
         };
       },
     });
-    setPage((page) => page + 1);
+    setPage(data.characters.info.next);
   };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -124,4 +127,6 @@ export default function CharactersPage() {
       )} */}
     </div>
   );
-}
+};
+
+export default CharactersPage;

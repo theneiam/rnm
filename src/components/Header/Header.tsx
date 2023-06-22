@@ -9,10 +9,10 @@ export const Header: React.FC = () => {
         <Image src="/logo.svg" alt="logo" width={150} height={150} />
       </Link>
       <div className="flex flex-row text-[#62a4ab] gap-4">
-        <Link href="/characters" className="text-2xl">
+        <Link href="/characters" className="text-xl">
           Charactes
         </Link>
-        <Link href="/guess-who" className="text-2xl">
+        <Link href="/guess-who" className="text-xl">
           Guess who?
         </Link>
       </div>
